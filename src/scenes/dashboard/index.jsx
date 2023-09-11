@@ -1,4 +1,3 @@
-import { ConnectWallet } from '@thirdweb-dev/react';
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";

@@ -8,14 +8,18 @@ import {
 } from "@thirdweb-dev/react";
 import { ChainId } from "@thirdweb-dev/sdk";
 import { useState, useEffect, useMemo } from "react";
+import { tokens } from "../../theme";
+import { useTheme } from "@mui/material";
 import { AddressZero } from "@ethersproject/constants";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Header from "../../components/Header";
 
 const Vote = () => {
   // Use the hooks thirdweb give us.
   const address = useAddress();
   console.log("👋 Address:", address);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   // Initialize our Edition Drop contract
   const editionDropAddress = "0x79D9d9dadDf68E0aF34eC6434afB8365655c4999";
   const { contract: editionDrop } = useContract(
@@ -173,7 +177,19 @@ const Vote = () => {
   // Add this little piece!
   if (hasClaimedNFT) {
     return (
-      <Box m="20px">
+      <Box m="20px" sx={{
+        ".card": {
+          backgroundColor: colors.blueAccent[700],
+          borderBottom: "none",
+          padding: "1rem",
+          borderRadius: "1rem",
+          boxShadow: "3.1px 6.2px 6.2px hsl(0deg 0% 0% / 0.4)"
+        },
+        ".vote": {
+          backgroundColor: "white",
+          color: "#000"
+        }
+      }}>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
             title="DaoGameToken Member Page"
@@ -320,17 +336,17 @@ const Vote = () => {
                     </div>
                   </div>
                 ))}
-                <button
-                  disabled={isVoting || hasVoted}
-                  type="submit"
-                  className="Vote"
-                >
-                  {isVoting
+
+            <Box display="flex" justifyContent="end" mt="20px">
+              <Button type="submit" color="secondary" variant="contained">
+              {isVoting
                     ? "Voting..."
                     : hasVoted
                     ? "You Already Voted"
                     : "Submit Votes"}
-                </button>
+              </Button>
+            </Box>
+                
                 {!hasVoted && (
                   <small>
                     This will trigger multiple transactions that you will need
@@ -348,8 +364,11 @@ const Vote = () => {
   // This is the case where we have the user's address
   // which means they've connected their wallet to our site!
   return (
-    <div className="mint-nft">
-      <h1>Mint your free DaoGameToken Membership NFT</h1>
+    <Box m="20px">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
+        <Header title="Mint your free DaoGameToken Membership NFT" subtitle="to participate in our voting system" />       
+      </Box>
+      <div className="mint-nft">
       <div className="btn-hero">
         <Web3Button
           contractAddress={editionDropAddress}
@@ -368,7 +387,9 @@ const Vote = () => {
           Mint your NFT (FREE)
         </Web3Button>
       </div>
-    </div>
+      </div>
+    </Box>
+      
   );
 };
 
