@@ -7,9 +7,9 @@ import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import Header from "../../components/Header";
-import LineChart from "../../components/LineChart";
-import GeographyChart from "../../components/GeographyChart";
-import BarChart from "../../components/BarChart";
+import LineChart from "../../components/CoinValue";
+import GeographyChart from "../../components/VolumeCoin";
+import BarChart from "../../components/CategoryChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 
@@ -124,18 +124,17 @@ const Dashboard = () => {
           >
             <Box>
               <Typography
-                variant="h5"
+                variant="h1"
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Revenue Generated
+                Coin Tracker
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
               </Typography>
             </Box>
             <Box>
@@ -208,8 +207,8 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
           p="30px"
         >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
+          <Typography variant="h2" fontWeight="600">
+            Funds Deployed
           </Typography>
           <Box
             display="flex"
@@ -219,13 +218,13 @@ const Dashboard = () => {
           >
             <ProgressCircle size="125" />
             <Typography
-              variant="h5"
+              variant="h3"
               color={colors.greenAccent[500]}
               sx={{ mt: "15px" }}
             >
-              $48,352 revenue generated
+              84% 
             </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
+            <Typography>Funds Deployed on This Coin</Typography>
           </Box>
         </Box>
         <Box
@@ -234,11 +233,11 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
         >
           <Typography
-            variant="h5"
+            variant="h2"
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            Sales Quantity
+            Games Categories
           </Typography>
           <Box height="250px" mt="-20px">
             <BarChart isDashboard={true} />
@@ -251,11 +250,11 @@ const Dashboard = () => {
           padding="30px"
         >
           <Typography
-            variant="h5"
+            variant="h2"
             fontWeight="600"
             sx={{ marginBottom: "15px" }}
           >
-            Geography Based Traffic
+            Coin Volume
           </Typography>
           <Box height="200px">
             <GeographyChart isDashboard={true} />
