@@ -20,6 +20,7 @@ import BarChart from '../../components/CategoryChart';
 import StatBox from '../../components/StatBox';
 import ProgressCircle from '../../components/ProgressCircle';
 import ChartComponent from '../../components/InteractiveChartValue';
+import BarComponent from '../../components/InteractiveVolume';
 
 
 const Dashboard = () => {
@@ -27,21 +28,25 @@ const Dashboard = () => {
   const [gameSelected, setGameSelected] = useState('1');
   const [chainSelected, setChainSelected] = useState('1');
   const [timeSelected, setTimeSelected] = useState('32');
+  
   const handleGameSelect = (e) => {
     const selectedValue = e.target.value;
     setGameSelected(selectedValue);
+    setShowChart(false);
     console.log(selectedValue);
   };
 
   const handleChainSelect = (e) => {
     const selectedValue = e.target.value;
     setChainSelected(selectedValue);
+    setShowChart(false);
     console.log(selectedValue);
   };
 
   const handleRangeSelect = (e) => {
     const selectedValue = e.target.value;
     setTimeSelected(selectedValue);
+    setShowChart(false);
     console.log(selectedValue);
   };
   const [showChart, setShowChart] = useState(false);
@@ -49,6 +54,7 @@ const Dashboard = () => {
   // Handle button click to show ChartComponent
   const handleTrackCoinClick = () => {
     setShowChart(true);
+    
   };
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -314,7 +320,8 @@ const Dashboard = () => {
             Coin Volume
           </Typography>
           <Box height="200px">
-            <GeographyChart isDashboard={true} />
+            {/* <GeographyChart isDashboard={true} /> */}
+            { showChart && <BarComponent chain={chainSelected} coin={gameSelected} range={timeSelected} />}
           </Box>
         </Box>
       </Box>
