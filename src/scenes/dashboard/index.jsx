@@ -21,7 +21,7 @@ import StatBox from '../../components/StatBox';
 import ProgressCircle from '../../components/ProgressCircle';
 import ChartComponent from '../../components/InteractiveChartValue';
 import BarComponent from '../../components/InteractiveVolume';
-
+import InterfaceComponent from '../../components/UpdateData';
 
 const Dashboard = () => {
   // Inicializa el estado con useState
@@ -54,10 +54,11 @@ const Dashboard = () => {
   // Handle button click to show ChartComponent
   const handleTrackCoinClick = () => {
     setShowChart(true);
-    
   };
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -83,8 +84,7 @@ const Dashboard = () => {
           <Typography
                 variant="h3"
                 fontWeight="600"
-                color={colors.grey[100]}
-               
+                color={colors.grey[100]}           
           >
                 Select Game
           </Typography>
@@ -106,8 +106,7 @@ const Dashboard = () => {
             <option class="dropdown-item" id="game_selected" value="10">Crypto Unicorns</option>
             <option class="dropdown-item" id="game_selected" value="11">Pixels.xyz</option>
             <option class="dropdown-item" id="game_selected" value="12">My Pet Hooligan</option>
-          </select>
-          
+          </select>          
         </Box>
         <Box
           gridColumn="span 3"
@@ -130,8 +129,7 @@ const Dashboard = () => {
             <option class="dropdown-item" id="chain_selected" value="1">USD</option>
             <option class="dropdown-item" id="chain_selected" value="2">Etherium</option>
             <option class="dropdown-item" id="chain_selected" value="3">Sepolia</option>
-          </select>
-         
+          </select>  
         </Box>
         <Box
           gridColumn="span 3"
@@ -166,11 +164,9 @@ const Dashboard = () => {
           <Button
             type="submit" color="secondary" variant="contained" onClick={handleTrackCoinClick}
           >
-            Track Coin
-            
+            Track Coin           
           </Button>
         </Box>
-
         {/* ROW 2 */}
         <Box
           gridColumn="span 8"
@@ -245,19 +241,21 @@ const Dashboard = () => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  {transaction.txId}
+                  {transaction.GameID}
                 </Typography>
                 <Typography color={colors.grey[100]}>
-                  {transaction.user}
+                  {transaction.GameName}
                 </Typography>
               </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
+
+               {/* Componente asisgnado */}
+                <InterfaceComponent GameID={transaction.GameID} CoinID={transaction.CoinID} ChartURL={transaction.url} EndpointChart={transaction.ChartURL} type={transaction.type} />
               <Box
                 backgroundColor={colors.greenAccent[500]}
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${transaction.cost}
+                {transaction.Category}
               </Box>
             </Box>
           ))}

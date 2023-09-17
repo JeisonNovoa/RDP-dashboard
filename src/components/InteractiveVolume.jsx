@@ -87,7 +87,7 @@ const BarComponent = ({ chain, coin, range , isCustomLineColors = false, isDashb
         tickSize: 5,
         tickPadding: 5,
         tickRotation: -20,
-        legend: isDashboard ? undefined : 'categories',
+        legend: isDashboard ? undefined : 'Date',
         legendPosition: 'middle',
         legendOffset: 32,
       }}

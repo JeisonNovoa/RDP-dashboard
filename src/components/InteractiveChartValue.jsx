@@ -95,7 +95,7 @@ const ChartComponent = ({ chain, coin, range , isCustomLineColors = false, isDas
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "transportation", // added
+        legend: isDashboard ? undefined : "Date", // added
         legendOffset: 36,
         legendPosition: "middle",
       }}
