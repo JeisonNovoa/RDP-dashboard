@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@mui/material';
+import { box , useTheme , IconButton } from '@mui/material';
 import { tokens } from "../theme";
 import Box from '@mui/material/Box'; // Importa el componente Box para mostrar el resultado.
 import UpdateIcon from '@mui/icons-material/Update';
@@ -83,12 +83,15 @@ const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, 
 
   
   const color = status === 'Error' ? colors.redAccent[500] : colors.greenAccent[500];
-
+  //<button  onClick={ postData} starticon={< UpdateIcon />} >Refresh</button> }
   return (
-    <Box color={color}>
+    <Box color={color} icon={< UpdateIcon />}>
       {status}
       {/* Agrega un botón para enviar datos POST */}
-      <button onClick={postData} icon={< UpdateIcon />} >Refresh</button> 
+      
+      <IconButton type="button" sx={{ p: 1 }} onclick={postData} >
+          <UpdateIcon />
+        </IconButton>
     </Box>
   );
 };
