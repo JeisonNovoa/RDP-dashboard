@@ -176,20 +176,24 @@ const Vote = () => {
   }
   // Add this little piece!
   if (hasClaimedNFT) {
+    console.log("PROPUESTAS LONGITUD" + proposals.length);
     return (
-      <Box m="20px" sx={{
-        ".card": {
-          backgroundColor: colors.blueAccent[700],
-          borderBottom: "none",
-          padding: "1rem",
-          borderRadius: "1rem",
-          boxShadow: "3.1px 6.2px 6.2px hsl(0deg 0% 0% / 0.4)"
-        },
-        ".vote": {
-          backgroundColor: "white",
-          color: "#000"
-        }
-      }}>
+      <Box
+        m="20px"
+        sx={{
+          ".card": {
+            backgroundColor: colors.blueAccent[700],
+            borderBottom: "none",
+            padding: "1rem",
+            borderRadius: "1rem",
+            boxShadow: "3.1px 6.2px 6.2px hsl(0deg 0% 0% / 0.4)",
+          },
+          ".vote": {
+            backgroundColor: "white",
+            color: "#000",
+          },
+        }}
+      >
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Header
             title="DaoGameToken Member Page"
@@ -226,6 +230,17 @@ const Vote = () => {
                   })}
                 </tbody>
               </table>
+              <Box display="flex" justifyContent="center" mt="20px">
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  onClick={() => {
+                    window.location.href = "/form";
+                  }}
+                >
+                  Create New Proposal
+                </Button>
+              </Box>
             </div>
             <div>
               <h2>Active Proposals</h2>
@@ -236,6 +251,11 @@ const Vote = () => {
 
                   //before we do async things, we want to disable the button to prevent double clicks
                   setIsVoting(true);
+
+                  // Let's filter out the defeated proposals
+                  const activeProposals = proposals.filter(
+                    (proposal) => proposal.state !== 3
+                  );
 
                   // lets get the votes from the form for the values
                   const votes = proposals.map((proposal) => {
@@ -314,44 +334,53 @@ const Vote = () => {
                   }
                 }}
               >
-                {proposals.map((proposal) => (
-                  <div key={proposal.proposalId} className="card">
-                    <h5>{proposal.description}</h5>
-                    <div>
-                      {proposal.votes.map(({ type, label }) => (
-                        <div key={type}>
-                          <input
-                            type="radio"
-                            id={proposal.proposalId + "-" + type}
-                            name={proposal.proposalId}
-                            value={type}
-                            //default the "abstain" vote to checked
-                            defaultChecked={type === 2}
-                          />
-                          <label htmlFor={proposal.proposalId + "-" + type}>
-                            {label}
-                          </label>
-                        </div>
-                      ))}
+                {proposals.map((proposal) => {
+                  console.dir(proposals);
+                  // Filtrar las propuestas en estado "defeated" (state === 3)
+                  if (proposal.state === 3) {
+                    return null;
+                  }
+                  return (
+                    <div key={proposal.proposalId} className="card">
+                      <h5>{proposal.description}</h5>
+                      <div>
+                        {proposal.votes.map(({ type, label }) => (
+                          <div key={type}>
+                            <input
+                              type="radio"
+                              id={proposal.proposalId + "-" + type}
+                              name={proposal.proposalId}
+                              value={type}
+                              //default the "abstain" vote to checked
+                              defaultChecked={type === 2}
+                            />
+                            <label htmlFor={proposal.proposalId + "-" + type}>
+                              {label}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
-
-            <Box display="flex" justifyContent="end" mt="20px">
-              <Button type="submit" color="secondary" variant="contained">
-              {isVoting
-                    ? "Voting..."
-                    : hasVoted
-                    ? "You Already Voted"
-                    : "Submit Votes"}
-              </Button>
-            </Box>
-                
-                {!hasVoted && (
-                  <small>
-                    This will trigger multiple transactions that you will need
-                    to sign.
-                  </small>
+                  );
+                })}
+                {proposals.filter(proposal => proposal.state !== 3).length > 0 ? (
+                  <Box display="flex" justifyContent="end" mt="20px">
+                    <Button type="submit" color="secondary" variant="contained">
+                      {isVoting
+                        ? "Voting..."
+                        : hasVoted
+                        ? "You Already Voted"
+                        : "Submit Votes"}
+                    </Button>
+                    {!hasVoted && (
+                      <small>
+                        This will trigger multiple transactions that you will
+                        need to sign.
+                      </small>
+                    )}
+                  </Box>
+                ) : (
+                  <p>No hay propuestas disponibles en este momento.</p>
                 )}
               </form>
             </div>
@@ -366,30 +395,32 @@ const Vote = () => {
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Mint your free DaoGameToken Membership NFT" subtitle="to participate in our voting system" />       
+        <Header
+          title="Mint your free DaoGameToken Membership NFT"
+          subtitle="to participate in our voting system"
+        />
       </Box>
       <div className="mint-nft">
-      <div className="btn-hero">
-        <Web3Button
-          contractAddress={editionDropAddress}
-          action={(contract) => {
-            contract.erc1155.claim(0, 1);
-          }}
-          onSuccess={() => {
-            console.log(
-              `🌊 Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`
-            );
-          }}
-          onError={(error) => {
-            console.error("Failed to mint NFT", error);
-          }}
-        >
-          Mint your NFT (FREE)
-        </Web3Button>
-      </div>
+        <div className="btn-hero">
+          <Web3Button
+            contractAddress={editionDropAddress}
+            action={(contract) => {
+              contract.erc1155.claim(0, 1);
+            }}
+            onSuccess={() => {
+              console.log(
+                `🌊 Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`
+              );
+            }}
+            onError={(error) => {
+              console.error("Failed to mint NFT", error);
+            }}
+          >
+            Mint your NFT (FREE)
+          </Web3Button>
+        </div>
       </div>
     </Box>
-      
   );
 };
 

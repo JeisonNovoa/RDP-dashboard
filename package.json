@@ -24,6 +24,7 @@
     "assert": "^2.1.0",
     "browserify-zlib": "github:browserify/browserify-zlib",
     "chart.js": "^3.9.1",
+    "dotenv": "^16.3.1",
     "ethers": "^5.7.2",
     "formik": "^2.2.9",
     "http": "^0.0.1-security",

@@ -1,19 +1,115 @@
+import React, { useState } from "react";
+import sdk from "../../scripts/assets/initialize-sdk.mjs";
+import { ethers } from "ethers";
 import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Form = () => {
+function ProposalForm() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
+  const [proposalType, setProposalType] = useState("mint"); // Puede ser 'mint' o 'transfer'
+  const [recipient, setRecipient] = useState(""); // Nuevo estado para la dirección del destinatario
+  const [showRecipientField, setShowRecipientField] = useState(false); // Estado para controlar la visibilidad
+
+  const handleFormSubmit = async (values) => {
+    try {
+      const vote = await sdk.getContract(
+        "0xa2699D854Ce73005F181B28bB3770c81b3dc1E7A",
+        "vote"
+      );
+      const token = await sdk.getContract(
+        "0x9CD97b01e1E042cE63656E4E6EdC75f2610Ff323",
+        "token"
+      );
+
+      const executions = [];
+
+      if (proposalType === "mint") {
+        const mintExecution = {
+          toAddress: token.getAddress(),
+          nativeTokenValue: 0,
+          transactionData: token.encoder.encode("mintTo", [
+            vote.getAddress(),
+            ethers.utils.parseUnits(values.amount.toString(), 18),
+          ]),
+        };
+        executions.push(mintExecution);
+      } else if (proposalType === "transfer") {
+        const transferExecution = {
+          toAddress: recipient, // Usar la dirección del destinatario ingresada
+          nativeTokenValue: 0,
+          transactionData: token.encoder.encode("transfer", [
+            recipient, // Usar la dirección del destinatario ingresada
+            ethers.utils.parseUnits(values.amount.toString(), 18),
+          ]),
+        };
+        executions.push(transferExecution);
+      }
+
+      const proposalDescription = `${values.description}`;
+
+      await vote.propose(proposalDescription, executions);
+      toast.success("Proposal created successfully", {
+        position: "top-right",
+        autoClose: 3000, // Cerrar el mensaje automáticamente después de 3 segundos
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      console.log("✅ Successfully created proposal");
+    } catch (error) {
+      console.error("Failed to create proposal", error);
+      toast.error("Failed to create proposal", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
+  // Función para manejar el cambio en el campo "Proposal Type"
+  const handleProposalTypeChange = (e) => {
+    setProposalType(e.target.value);
+
+    // Mostrar el campo de destinatario si la opción es "transfer"
+    if (e.target.value === "transfer") {
+      setShowRecipientField(true);
+    } else {
+      // Ocultar el campo de destinatario si la opción es "mint"
+      setShowRecipientField(false);
+    }
+  };
+
+  // Validación del formulario
+  const checkoutSchema = yup.object().shape({
+    description: yup.string().required("Description is required"),
+    amount: yup
+      .number()
+      .typeError("Amount must be a number")
+      .required("Amount is required")
+      .positive("Amount must be positive"),
+  });
+
+  const initialValues = {
+    description: "",
+    amount: "",
   };
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
+      <Header title="Create Proposal" subtitle="Create a New Proposal" />
 
       <Formik
         onSubmit={handleFormSubmit}
@@ -41,114 +137,89 @@ const Form = () => {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="First Name"
+                label="Description"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.firstName}
-                name="firstName"
-                error={!!touched.firstName && !!errors.firstName}
-                helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Last Name"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.lastName}
-                name="lastName"
-                error={!!touched.lastName && !!errors.lastName}
-                helperText={touched.lastName && errors.lastName}
-                sx={{ gridColumn: "span 2" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Email"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.email}
-                name="email"
-                error={!!touched.email && !!errors.email}
-                helperText={touched.email && errors.email}
+                value={values.description}
+                name="description"
+                error={!!touched.description && !!errors.description}
+                helperText={touched.description && errors.description}
                 sx={{ gridColumn: "span 4" }}
               />
               <TextField
                 fullWidth
                 variant="filled"
-                type="text"
-                label="Contact Number"
+                type="number"
+                label="Amount"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                value={values.contact}
-                name="contact"
-                error={!!touched.contact && !!errors.contact}
-                helperText={touched.contact && errors.contact}
+                value={values.amount}
+                name="amount"
+                error={!!touched.amount && !!errors.amount}
+                helperText={touched.amount && errors.amount}
                 sx={{ gridColumn: "span 4" }}
               />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address 1"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.address1}
-                name="address1"
-                error={!!touched.address1 && !!errors.address1}
-                helperText={touched.address1 && errors.address1}
-                sx={{ gridColumn: "span 4" }}
-              />
-              <TextField
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Address 2"
-                onBlur={handleBlur}
-                onChange={handleChange}
-                value={values.address2}
-                name="address2"
-                error={!!touched.address2 && !!errors.address2}
-                helperText={touched.address2 && errors.address2}
-                sx={{ gridColumn: "span 4" }}
-              />
+              <Box
+                sx={{
+                  gridColumn: "span 4",
+                  position: "relative",
+                  maxWidth: "250px",
+                }}
+              >
+                <label>Proposal Type:</label>
+                <select
+                  value={proposalType}
+                  onChange={handleProposalTypeChange}
+                  style={{
+                    width: "100%",
+                    cursor: "pointer",
+                    padding: "7px 10px",
+                    height: "42px",
+                    outline: 0,
+                    border: 0,
+                    borderRadius: 0,
+                    background: "#f0f0f0",
+                    color: "#7b7b7b",
+                    fontSize: "1em",
+                    fontFamily: "'Quicksand', sans-serif",
+                    borderWidth: "2px",
+                    borderColor: "rgba(0,0,0,0.2)",
+                    borderRadius: "12px",
+                    position: "relative",
+                    transition: "all 0.25s ease",
+                  }}
+                >
+                  <option value="mint">Mint</option>
+                  <option value="transfer">Transfer</option>
+                </select>
+              </Box>
+              {showRecipientField && (
+                <TextField
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Recipient Address"
+                  onBlur={handleBlur}
+                  onChange={(e) => setRecipient(e.target.value)}
+                  value={recipient}
+                  name="recipient"
+                  error={!!touched.recipient && !!errors.recipient}
+                  helperText={touched.recipient && errors.recipient}
+                  sx={{ gridColumn: "span 4" }}
+                />
+              )}
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create New User
+                Create Proposal
               </Button>
             </Box>
           </form>
         )}
       </Formik>
+      <ToastContainer />
     </Box>
   );
-};
+}
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
-};
-
-export default Form;
+export default ProposalForm;
