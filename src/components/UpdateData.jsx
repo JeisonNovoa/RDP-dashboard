@@ -11,7 +11,7 @@ const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, 
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState('ok');
   const fetchData = async () => {
-    if (type == "coin"){
+    if (type === "coin"){
         try {
             const response = await fetch(ChartURL);
             const data = await response.json();
@@ -221,12 +221,17 @@ const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, 
       <Box>
       Status: {status}
       </Box>
-      {/* Agrega un botón para enviar datos POST */}
-      <Button
+      {/* Agrega un botón para enviar datos
+       <Button
             type="submit" color="secondary" variant="contained" onClick={postData}
       >
       Refresh Data        
       </Button>
+      POST */}
+     
+      <IconButton type="button" sx={{ p: 1 }} onclick={postData} >
+          <UpdateIcon />
+        </IconButton>
     </Box>
   );
 };
