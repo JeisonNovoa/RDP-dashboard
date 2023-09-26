@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme , IconButton } from '@mui/material';
+import { useTheme , Button } from '@mui/material';
 import { tokens } from "../theme";
 import Box from '@mui/material/Box';
 import UpdateIcon from '@mui/icons-material/Update';
@@ -221,19 +221,19 @@ const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, 
       <Box>
       Status: {status}
       </Box>
-      {/* Agrega un botón para enviar datos
+      {/* Agrega un botón para enviar datos */}
        <Button
             type="submit" color="secondary" variant="contained" onClick={postData}
       >
       Refresh Data        
       </Button>
-      POST 
-      jaja , no descomentar
-      */}
+      {/* POST 
+      jaja , no descomentar */}
      
-      <IconButton type="button" sx={{ p: 1 }} onclick={postData} >
+     
+      {/* <IconButton type="button" sx={{ p: 1 }} onclick={postData} >
           <UpdateIcon />
-        </IconButton>
+        </IconButton> */}
     </Box>
   );
 };
