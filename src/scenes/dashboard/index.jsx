@@ -2,22 +2,13 @@ import React, { useState } from 'react'; // Importa useState para gestionar el e
 import {
   Box,
   Button,
-  IconButton,
   Typography,
   useTheme,
 } from '@mui/material';
 import { tokens } from '../../theme';
 import { mockTransactions } from '../../data/mockData';
-import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
-import EmailIcon from '@mui/icons-material/Email';
-import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import TrafficIcon from '@mui/icons-material/Traffic';
 import Header from '../../components/Header';
-import LineChart from '../../components/CoinValue';
-import GeographyChart from '../../components/VolumeCoin';
 import BarChart from '../../components/CategoryChart';
-import StatBox from '../../components/StatBox';
 import ProgressCircle from '../../components/ProgressCircle';
 import ChartComponent from '../../components/InteractiveChartValue';
 import BarComponent from '../../components/InteractiveVolume';
@@ -195,13 +186,7 @@ const Dashboard = () => {
               >
               </Typography>
             </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
-                />
-              </IconButton>
-            </Box>
+            
           </Box>
           <Box height="250px" m="-20px 0 0 0">
             {/* <LineChart isDashboard={true} /> */}

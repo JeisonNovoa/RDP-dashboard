@@ -15,9 +15,11 @@ function ProposalForm() {
   const [proposalType, setProposalType] = useState("mint"); // Puede ser 'mint' o 'transfer'
   const [recipient, setRecipient] = useState(""); // Nuevo estado para la dirección del destinatario
   const [showRecipientField, setShowRecipientField] = useState(false); // Estado para controlar la visibilidad
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (values) => {
     try {
+      setIsLoading(true);
       const vote = await sdk.getContract(
         "0xa2699D854Ce73005F181B28bB3770c81b3dc1E7A",
         "vote"
@@ -76,6 +78,8 @@ function ProposalForm() {
         draggable: true,
         progress: undefined,
       });
+    } finally {
+      setIsLoading(false); // Desactivar la carga, ya sea éxito o error
     }
   };
 
@@ -175,9 +179,8 @@ function ProposalForm() {
                     cursor: "pointer",
                     padding: "7px 10px",
                     height: "42px",
-                    outline: 0,
-                    border: 0,
-                    borderRadius: 0,
+                    outline: "0",
+                    border: "0",
                     background: "#f0f0f0",
                     color: "#7b7b7b",
                     fontSize: "1em",
@@ -211,7 +214,7 @@ function ProposalForm() {
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button type="submit" color="secondary" variant="contained">
-                Create Proposal
+                {isLoading ? "Loading..." : "Create Proposal"}
               </Button>
             </Box>
           </form>

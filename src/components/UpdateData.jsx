@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { box , useTheme , IconButton } from '@mui/material';
+import { useTheme , IconButton } from '@mui/material';
 import { tokens } from "../theme";
-import Box from '@mui/material/Box'; // Importa el componente Box para mostrar el resultado.
+import Box from '@mui/material/Box';
 import UpdateIcon from '@mui/icons-material/Update';
 const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, EndpointChart, type ,isDashboard = false }) => {
   const theme = useTheme();
@@ -11,7 +11,7 @@ const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, 
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState('ok');
   const fetchData = async () => {
-    if (type == "coin"){
+    if (type === "coin"){
         try {
             const response = await fetch(ChartURL);
             const data = await response.json();

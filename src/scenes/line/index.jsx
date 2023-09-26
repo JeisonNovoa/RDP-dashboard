@@ -2,7 +2,6 @@ import React, { useState } from 'react'; // Importa useState para gestionar el e
 import {
   Box,
   Button,
-  IconButton,
   Typography,
   useTheme,
 } from '@mui/material';

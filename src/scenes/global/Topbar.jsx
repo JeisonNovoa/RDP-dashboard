@@ -4,9 +4,9 @@ import { ColorModeContext, tokens } from "../../theme";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+// import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+// import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+// import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Topbar = () => {
@@ -37,15 +37,15 @@ const Topbar = () => {
             <LightModeOutlinedIcon />
           )}
         </IconButton>
-        <IconButton>
+        {/* <IconButton>
           <NotificationsOutlinedIcon />
-        </IconButton>
-        <IconButton>
+        </IconButton> */}
+        {/* <IconButton>
           <SettingsOutlinedIcon />
-        </IconButton>
-        <IconButton>
+        </IconButton> */}
+        {/* <IconButton>
           <PersonOutlinedIcon />
-        </IconButton>
+        </IconButton> */}
       </Box>
     </Box>
   );
