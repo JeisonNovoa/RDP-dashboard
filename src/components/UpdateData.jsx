@@ -227,7 +227,9 @@ const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, 
       >
       Refresh Data        
       </Button>
-      POST */}
+      POST 
+      jaja , no descomentar
+      */}
      
       <IconButton type="button" sx={{ p: 1 }} onclick={postData} >
           <UpdateIcon />
