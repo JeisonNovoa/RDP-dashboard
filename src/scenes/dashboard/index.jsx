@@ -56,7 +56,6 @@ const Dashboard = () => {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />       
       </Box>
-
       {/* GRID & CHARTS */}
       <Box
         display="grid"
@@ -80,8 +79,6 @@ const Dashboard = () => {
                 Select Game
           </Typography>
           <select 
-            className="form-control outline-primary" 
-            aria-labelledby="game" 
             value={gameSelected}
             onChange={handleGameSelect}
             >
@@ -121,7 +118,7 @@ const Dashboard = () => {
             <option class="dropdown-item" id="chain_selected" value="4">Great Britain Pound</option>
             <option class="dropdown-item" id="chain_selected" value="5">European Monetary Unit (Euro)</option>
             <option class="dropdown-item" id="chain_selected" value="6">Japanese yen</option>
-          </select>   
+          </select>  
         </Box>
         <Box
           gridColumn="span 3"
@@ -136,8 +133,6 @@ const Dashboard = () => {
                 Select Timelapse
           </Typography>
           <select 
-            className="form-control outline-primary" 
-            aria-labelledby="chain" 
             value={timeSelected} 
             onChange={handleRangeSelect}
             >
@@ -161,7 +156,7 @@ const Dashboard = () => {
         </Box>
         {/* ROW 2 */}
         <Box
-          gridColumn="span 8"
+          gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
         >
@@ -187,15 +182,60 @@ const Dashboard = () => {
               >
               </Typography>
             </Box>
-            
           </Box>
           <Box height="250px" m="-20px 0 0 0">
             {/* <LineChart isDashboard={true} /> */}
             { showChart && <ChartComponent chain={chainSelected} coin={gameSelected} range={timeSelected} />}
           </Box>
         </Box>
+        {/* ROW 3 */}
         <Box
           gridColumn="span 4"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          p="30px"
+        >
+          <Typography variant="h2" fontWeight="600">
+            Funds Deployed
+          </Typography>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            mt="25px"
+          >
+            <ProgressCircle size="125" />
+            <Typography
+              variant="h3"
+              color={colors.greenAccent[500]}
+              sx={{ mt: "15px" }}
+            >
+              84% 
+            </Typography>
+            <Typography>Funds Deployed on This Coin</Typography>
+          </Box>
+        </Box>
+        <Box
+          gridColumn="span 8"
+          gridRow="span 2"
+          backgroundColor={colors.primary[400]}
+          padding="30px"
+        >
+          <Typography
+            variant="h2"
+            fontWeight="600"
+            sx={{ marginBottom: "15px" }}
+          >
+            Coin Volume
+          </Typography>
+          <Box height="200px">
+            {/* <GeographyChart isDashboard={true} /> */}
+            { showChart && <BarComponent chain={chainSelected} coin={gameSelected} range={timeSelected} />}
+          </Box>
+        </Box>
+        {/* ROW 4 */}
+        <Box
+          gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
@@ -227,7 +267,7 @@ const Dashboard = () => {
                   variant="h5"
                   fontWeight="600"
                 >
-                  {transaction.GameID}
+                Game ID: {transaction.GameID}
                 </Typography>
                 <Typography color={colors.grey[100]}>
                   {transaction.GameName}
@@ -246,36 +286,9 @@ const Dashboard = () => {
             </Box>
           ))}
         </Box>
-
-        {/* ROW 3 */}
+        {/* ROW 5 */}
         <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h2" fontWeight="600">
-            Funds Deployed
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography
-              variant="h3"
-              color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
-            >
-              84% 
-            </Typography>
-            <Typography>Funds Deployed on This Coin</Typography>
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
+          gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
         >
@@ -288,24 +301,6 @@ const Dashboard = () => {
           </Typography>
           <Box height="250px" mt="-20px">
             <BarChart isDashboard={true} />
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-        >
-          <Typography
-            variant="h2"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Coin Volume
-          </Typography>
-          <Box height="200px">
-            {/* <GeographyChart isDashboard={true} /> */}
-            { showChart && <BarComponent chain={chainSelected} coin={gameSelected} range={timeSelected} />}
           </Box>
         </Box>
       </Box>
