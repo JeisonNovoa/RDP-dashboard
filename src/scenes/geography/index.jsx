@@ -102,8 +102,11 @@ const Geography = () => {
           >
             <option class="dropdown-item" id="chain_selected" value="1">USD</option>
             <option class="dropdown-item" id="chain_selected" value="2">Etherium</option>
-            <option class="dropdown-item" id="chain_selected" value="3">Sepolia</option>
-          </select>  
+            <option class="dropdown-item" id="chain_selected" value="3">Bitcoin</option>
+            <option class="dropdown-item" id="chain_selected" value="4">Great Britain Pound</option>
+            <option class="dropdown-item" id="chain_selected" value="5">European Monetary Unit (Euro)</option>
+            <option class="dropdown-item" id="chain_selected" value="6">Japanese yen</option>
+          </select>   
         </Box>
         <Box
           gridColumn="span 3"

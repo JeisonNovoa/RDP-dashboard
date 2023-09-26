@@ -14,7 +14,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/chart/1/2/mapped');
+        const response = await fetch('http://localhost:8080/api/chart/1/2/mapped');
         const data_API = await response.json();
         const DataChart = [{ 
             id: "Game1",
