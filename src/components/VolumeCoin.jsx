@@ -12,7 +12,7 @@ const BarChart = ({ isDashboard = false }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/chart/1/2/30/volume/mapped');
+        const response = await fetch('http://localhost:8080/api/chart/1/2/30/volume/mapped');
         const data = await response.json();
         setChartData(data);
         setLoading(false);

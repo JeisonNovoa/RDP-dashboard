@@ -384,8 +384,8 @@ export const mockTransactions = [
     GameName: 'Crypto Unicorns',
     Category: 'Farming Sim',
     url: "https://api.coingecko.com/api/v3/nfts/crypto-unicorns",
-    CoinURL:"http://localhost:8080/api/api/update/coin",
-    ChartURL:'http://localhost:8080/api/api/update/chart',
+    CoinURL:"http://localhost:8080/api/update/coin",
+    ChartURL:'http://localhost:8080/api/update/chart',
     type: "nft",
   },
   {

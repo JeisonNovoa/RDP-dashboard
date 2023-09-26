@@ -5,7 +5,7 @@ import { ResponsiveBar } from '@nivo/bar';
 import { tokens } from "../theme";
 const BarComponent = ({ chain, coin, range , isCustomLineColors = false, isDashboard = false } ) => {
   // Use the received props to construct your URLs
-  const url = new URL('http://localhost:8080/chart/');
+  const url = new URL('http://localhost:8080/api/chart/');
   const link_close = `${url}${chain}/${coin}/${range}/mapped`;
   const link_vol = `${url}${chain}/${coin}/${range}/volume/mapped`;
   const theme = useTheme();
