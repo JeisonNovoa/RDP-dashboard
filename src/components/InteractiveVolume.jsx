@@ -13,16 +13,21 @@ const BarComponent = ({ chain, coin, range , isCustomLineColors = false, isDashb
 
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(link_vol);
+        if (!response.ok) {
+          throw new Error('No se pudieron cargar los datos');
+        }
         //const data_API = await response.json();
         const data = await response.json();
         setChartData(data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setError(true);
         setLoading(false);
       }
     };
@@ -32,6 +37,10 @@ const BarComponent = ({ chain, coin, range , isCustomLineColors = false, isDashb
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>No se pudo cargar la gráfica</div>;
   }
 
   return (

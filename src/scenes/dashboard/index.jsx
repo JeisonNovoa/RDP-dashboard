@@ -81,6 +81,7 @@ const Dashboard = () => {
           <select 
             value={gameSelected}
             onChange={handleGameSelect}
+            id='gameSelect'
             >
             <option class="dropdown-item" id="game_selected" value="1">EV.io</option>
             <option class="dropdown-item" id="game_selected" value="5">League of Kingdoms</option>
@@ -111,6 +112,7 @@ const Dashboard = () => {
           <select 
             value={chainSelected} 
             onChange={handleChainSelect}
+            id='chainSelect'
           >
             <option class="dropdown-item" id="chain_selected" value="1">USD</option>
             <option class="dropdown-item" id="chain_selected" value="2">Etherium</option>
@@ -135,8 +137,9 @@ const Dashboard = () => {
           <select 
             value={timeSelected} 
             onChange={handleRangeSelect}
+            id='timeSelect'
             >
-            <option class="dropdown-item" id="time_slected" value="8">7 Days</option>
+            <option class="dropdown-item" id="time_selected" value="8">7 Days</option>
             <option class="dropdown-item" id="time_selected" value="16">15 Days</option>
             <option class="dropdown-item" id="time_selected" value="32">30 Days</option>
           </select>

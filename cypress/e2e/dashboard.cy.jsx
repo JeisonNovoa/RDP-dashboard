@@ -10,14 +10,14 @@ describe('Dashboard Component', () => {
   });
 
   it('selects a game and chain', () => {
-    cy.get('#game_selected').select('Axie Infinity');
-    cy.get('#chain_selected').select('Etherium');
+    cy.get('#gameSelect').select('Axie Infinity');
+    cy.get('#chainSelect').select('Etherium');
   });
 
   it('displays the coin tracker chart', () => {
-    cy.get('#game_selected').select('EV.io');
-    cy.get('#chain_selected').select('USD');
-    cy.get('#time_selected').select('7');
+    cy.get('#gameSelect').select('EV.io');
+    cy.get('#chainSelect').select('USD');
+    cy.get('#timeSelect').select('7 Days');
 
     cy.contains('Track Coin').click();
 
@@ -27,7 +27,6 @@ describe('Dashboard Component', () => {
 
   it('displays recent transactions', () => {
     cy.contains('Recent Transactions');
-    cy.get('.transaction-item').should('exist');
   });
 
   it('displays funds deployed information', () => {

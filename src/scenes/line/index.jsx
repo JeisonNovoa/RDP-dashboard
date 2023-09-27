@@ -36,6 +36,7 @@ const Line = () => {
     console.log(selectedValue);
   };
   const [showChart, setShowChart] = useState(false);
+  const [error, setError] = useState(false);
 
   // Handle button click to show ChartComponent
   const handleTrackCoinClick = () => {
@@ -67,19 +68,20 @@ const Line = () => {
             aria-labelledby="game" 
             value={gameSelected}
             onChange={handleGameSelect}
+            id='gameSelect'
             >
-            <option class="dropdown-item" id="game_selected" value="1">EV.io</option>
-            <option class="dropdown-item" id="game_selected" value="5">League of Kingdoms</option>
-            <option class="dropdown-item" id="game_selected" value="7">Big Time</option>
-            <option class="dropdown-item" id="game_selected" value="9">Champions Ascension</option>
-            <option class="dropdown-item" id="game_selected" value="2">Axie Infinity </option>
-            <option class="dropdown-item" id="game_selected" value="3">The Sandbox</option>
-            <option class="dropdown-item" id="game_selected" value="4">Illuvium</option>
-            <option class="dropdown-item" id="game_selected" value="6">Castle Crush</option>
-            <option class="dropdown-item" id="game_selected" value="8">Castaways</option>
-            <option class="dropdown-item" id="game_selected" value="10">Crypto Unicorns</option>
-            <option class="dropdown-item" id="game_selected" value="11">Pixels.xyz</option>
-            <option class="dropdown-item" id="game_selected" value="12">My Pet Hooligan</option>
+            <option className="dropdown-item" id="game_selected" value="1">EV.io</option>
+            <option className="dropdown-item" id="game_selected" value="5">League of Kingdoms</option>
+            <option className="dropdown-item" id="game_selected" value="7">Big Time</option>
+            <option className="dropdown-item" id="game_selected" value="9">Champions Ascension</option>
+            <option className="dropdown-item" id="game_selected" value="2">Axie Infinity </option>
+            <option className="dropdown-item" id="game_selected" value="3">The Sandbox</option>
+            <option className="dropdown-item" id="game_selected" value="4">Illuvium</option>
+            <option className="dropdown-item" id="game_selected" value="6">Castle Crush</option>
+            <option className="dropdown-item" id="game_selected" value="8">Castaways</option>
+            <option className="dropdown-item" id="game_selected" value="10">Crypto Unicorns</option>
+            <option className="dropdown-item" id="game_selected" value="11">Pixels.xyz</option>
+            <option className="dropdown-item" id="game_selected" value="12">My Pet Hooligan</option>
           </select>          
         </Box>
         <Box
@@ -99,13 +101,14 @@ const Line = () => {
             aria-labelledby="chain" 
             value={chainSelected} 
             onChange={handleChainSelect}
+            id='chainSelect'
           >
-            <option class="dropdown-item" id="chain_selected" value="1">USD</option>
-            <option class="dropdown-item" id="chain_selected" value="2">Etherium</option>
-            <option class="dropdown-item" id="chain_selected" value="3">Bitcoin</option>
-            <option class="dropdown-item" id="chain_selected" value="4">Great Britain Pound</option>
-            <option class="dropdown-item" id="chain_selected" value="5">European Monetary Unit (Euro)</option>
-            <option class="dropdown-item" id="chain_selected" value="6">Japanese yen</option>
+            <option className="dropdown-item" id="chain_selected" value="1">USD</option>
+            <option className="dropdown-item" id="chain_selected" value="2">Etherium</option>
+            <option className="dropdown-item" id="chain_selected" value="3">Bitcoin</option>
+            <option className="dropdown-item" id="chain_selected" value="4">Great Britain Pound</option>
+            <option className="dropdown-item" id="chain_selected" value="5">European Monetary Unit (Euro)</option>
+            <option className="dropdown-item" id="chain_selected" value="6">Japanese yen</option>
           </select>   
         </Box>
         <Box
@@ -125,10 +128,11 @@ const Line = () => {
             aria-labelledby="chain" 
             value={timeSelected} 
             onChange={handleRangeSelect}
+            id='timeSelect'
             >
-            <option class="dropdown-item" id="time_slected" value="8">7 Days</option>
-            <option class="dropdown-item" id="time_selected" value="16">15 Days</option>
-            <option class="dropdown-item" id="time_selected" value="32">30 Days</option>
+            <option className="dropdown-item" id="time_slected" value="8">7 Days</option>
+            <option className="dropdown-item" id="time_selected" value="16">15 Days</option>
+            <option className="dropdown-item" id="time_selected" value="32">30 Days</option>
           </select>
         </Box>
         <Box

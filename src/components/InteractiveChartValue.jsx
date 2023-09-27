@@ -15,10 +15,15 @@ const ChartComponent = ({ chain, coin, range , isCustomLineColors = false, isDas
 
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(link_close);
+        if (!response.ok) {
+          throw new Error('No se pudieron cargar los datos');
+        }
         const data_API = await response.json();
         const DataChart = [{ 
             id: "Game1",
@@ -29,6 +34,7 @@ const ChartComponent = ({ chain, coin, range , isCustomLineColors = false, isDas
         setLoading(false);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setError(true);
         setLoading(false);
       }
     };
@@ -38,6 +44,10 @@ const ChartComponent = ({ chain, coin, range , isCustomLineColors = false, isDas
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>No se pudo cargar la gráfica</div>;
   }
 
   return (

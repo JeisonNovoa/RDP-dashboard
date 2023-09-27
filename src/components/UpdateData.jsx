@@ -215,7 +215,6 @@ const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, 
 
   
   const color = status === 'Error' ? colors.redAccent[500] : colors.greenAccent[500];
-  //<button  onClick={ postData} starticon={< UpdateIcon />} >Refresh</button> }
   return (
     <Box color={color} icon={< UpdateIcon />}>
       <Box>
@@ -226,14 +225,7 @@ const InterfaceComponent = ({ GameID , CoinID ,CoinURL, ChartURL, EndpointCoin, 
             type="submit" color="secondary" variant="contained" onClick={postData}
       >
       Refresh Data        
-      </Button>
-      {/* POST 
-      jaja , no descomentar */}
-     
-     
-      {/* <IconButton type="button" sx={{ p: 1 }} onclick={postData} >
-          <UpdateIcon />
-        </IconButton> */}
+      </Button> 
     </Box>
   );
 };
