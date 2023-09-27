@@ -17,7 +17,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Vote = () => {
-  // Use the hooks thirdweb give us.
   const address = useAddress();
   console.log("👋 Address:", address);
   const theme = useTheme();

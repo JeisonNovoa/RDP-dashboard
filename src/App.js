@@ -27,7 +27,7 @@ function App() {
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/vote" element={ <Vote />} />
+              <Route path="/vote" element={<Vote />} />
               <Route path="/form" element={<ProposalForm />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />

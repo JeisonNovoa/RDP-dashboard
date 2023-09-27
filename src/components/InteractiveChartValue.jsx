@@ -5,7 +5,7 @@ import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
 
-const ChartComponent = ({ chain, coin, range , isCustomLineColors = false, isDashboard = false } ) => {
+const ChartComponent = ({ chain, coin, range, isCustomLineColors = false, isDashboard = false }) => {
   // Use the received props to construct your URLs
   const url = new URL('http://localhost:8080/api/chart/');
   const link_close = `${url}${chain}/${coin}/${range}/mapped`;
@@ -25,11 +25,11 @@ const ChartComponent = ({ chain, coin, range , isCustomLineColors = false, isDas
           throw new Error('No se pudieron cargar los datos');
         }
         const data_API = await response.json();
-        const DataChart = [{ 
-            id: "Game1",
-            color: tokens("dark").greenAccent[500],
-            data : data_API,
-        }];   
+        const DataChart = [{
+          id: "Game1",
+          color: tokens("dark").greenAccent[500],
+          data: data_API,
+        }];
         setChartData(DataChart);
         setLoading(false);
       } catch (error) {
@@ -47,7 +47,7 @@ const ChartComponent = ({ chain, coin, range , isCustomLineColors = false, isDas
   }
 
   if (error) {
-    return <div>No se pudo cargar la gráfica</div>;
+    return <div>Could not load graph</div>;
   }
 
   return (

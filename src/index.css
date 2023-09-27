@@ -24,8 +24,7 @@ body,
   padding: 1rem;
 }
 
-.mint-nft
-.member-page {
+.mint-nft .member-page {
   flex-direction: column;
   width: 960px;
   max-width: calc(100% - 1rem);
@@ -54,8 +53,6 @@ body,
 ::-webkit-scrollbar {
   width: 10px;
 }
-
-
 
 /* Track */
 ::-webkit-scrollbar-track {

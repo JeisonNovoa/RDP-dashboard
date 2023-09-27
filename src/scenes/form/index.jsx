@@ -12,9 +12,9 @@ import "react-toastify/dist/ReactToastify.css";
 function ProposalForm() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const [proposalType, setProposalType] = useState("mint"); // Puede ser 'mint' o 'transfer'
-  const [recipient, setRecipient] = useState(""); // Nuevo estado para la dirección del destinatario
-  const [showRecipientField, setShowRecipientField] = useState(false); // Estado para controlar la visibilidad
+  const [proposalType, setProposalType] = useState("mint");
+  const [recipient, setRecipient] = useState("");
+  const [showRecipientField, setShowRecipientField] = useState(false); // Status to control visibility
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFormSubmit = async (values) => {
@@ -43,10 +43,10 @@ function ProposalForm() {
         executions.push(mintExecution);
       } else if (proposalType === "transfer") {
         const transferExecution = {
-          toAddress: recipient, // Usar la dirección del destinatario ingresada
+          toAddress: recipient, // Use the recipient address entered
           nativeTokenValue: 0,
           transactionData: token.encoder.encode("transfer", [
-            recipient, // Usar la dirección del destinatario ingresada
+            recipient,
             ethers.utils.parseUnits(values.amount.toString(), 18),
           ]),
         };
@@ -58,7 +58,7 @@ function ProposalForm() {
       await vote.propose(proposalDescription, executions);
       toast.success("Proposal created successfully", {
         position: "top-right",
-        autoClose: 3000, // Cerrar el mensaje automáticamente después de 3 segundos
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -79,24 +79,24 @@ function ProposalForm() {
         progress: undefined,
       });
     } finally {
-      setIsLoading(false); // Desactivar la carga, ya sea éxito o error
+      setIsLoading(false);
     }
   };
 
-  // Función para manejar el cambio en el campo "Proposal Type"
+  // Function to handle the change in the "Proposal Type" field
   const handleProposalTypeChange = (e) => {
     setProposalType(e.target.value);
 
-    // Mostrar el campo de destinatario si la opción es "transfer"
+    // Show recipient field if option is "transfer"
     if (e.target.value === "transfer") {
       setShowRecipientField(true);
     } else {
-      // Ocultar el campo de destinatario si la opción es "mint"
+      // Hide recipient field if option is "mint"
       setShowRecipientField(false);
     }
   };
 
-  // Validación del formulario
+  // Form validation
   const checkoutSchema = yup.object().shape({
     description: yup.string().required("Description is required"),
     amount: yup

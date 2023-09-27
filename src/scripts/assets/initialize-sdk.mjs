@@ -2,15 +2,24 @@ import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import dotenv from "dotenv";
 dotenv.config();
 
-if (!process.env.REACT_APP_PRIVATE_KEY || process.env.REACT_APP_PRIVATE_KEY === "") {
+if (
+  !process.env.REACT_APP_PRIVATE_KEY ||
+  process.env.REACT_APP_PRIVATE_KEY === ""
+) {
   console.log("🛑 Private key not found.");
 }
 
-if (!process.env.REACT_APP_QUICKNODE_API_URL || process.env.REACT_APP_QUICKNODE_API_URL === "") {
+if (
+  !process.env.REACT_APP_QUICKNODE_API_URL ||
+  process.env.REACT_APP_QUICKNODE_API_URL === ""
+) {
   console.log("🛑 QuickNode API URL not found.");
 }
-
-if (!process.env.REACT_APP_WALLET_ADDRESS || process.env.REACT_APP_WALLET_ADDRESS === "") {
+1;
+if (
+  !process.env.REACT_APP_WALLET_ADDRESS ||
+  process.env.REACT_APP_WALLET_ADDRESS === ""
+) {
   console.log("🛑 Wallet Address not found.");
 }
 
@@ -33,4 +42,4 @@ const sdk = ThirdwebSDK.fromPrivateKey(
   }
 })();
 
-export default sdk; 
+export default sdk;

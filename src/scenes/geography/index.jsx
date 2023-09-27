@@ -1,21 +1,14 @@
-import React, { useState } from 'react'; // Importa useState para gestionar el estado
-import {
-  Box,
-  Button,
-  Typography,
-  useTheme,
-} from '@mui/material';
-import { tokens } from '../../theme';
-import BarComponent from '../../components/InteractiveVolume';
+import React, { useState } from "react";
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import { tokens } from "../../theme";
+import BarComponent from "../../components/InteractiveVolume";
 import Header from "../../components/Header";
 
-
 const Geography = () => {
-  // Inicializa el estado con useState
-  const [gameSelected, setGameSelected] = useState('1');
-  const [chainSelected, setChainSelected] = useState('1');
-  const [timeSelected, setTimeSelected] = useState('32');
-  
+  const [gameSelected, setGameSelected] = useState("1");
+  const [chainSelected, setChainSelected] = useState("1");
+  const [timeSelected, setTimeSelected] = useState("32");
+
   const handleGameSelect = (e) => {
     const selectedValue = e.target.value;
     setGameSelected(selectedValue);
@@ -49,111 +42,152 @@ const Geography = () => {
       <Header title="Coin Trading Volume" subtitle="Coin Volume" />
       {/* ROW 1 */}
       <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          //alignItems="center"
-          //justifyContent="center"
+        gridColumn="span 3"
+        backgroundColor={colors.primary[400]}
+        display="flex"
+        //alignItems="center"
+        //justifyContent="center"
+      >
+        <Typography variant="h3" fontWeight="600" color={colors.grey[100]}>
+          Select Game
+        </Typography>
+        <select
+          className="form-control outline-primary"
+          aria-labelledby="game"
+          value={gameSelected}
+          onChange={handleGameSelect}
+          id="gameSelect"
         >
-          <Typography
-                variant="h3"
-                fontWeight="600"
-                color={colors.grey[100]}           
-          >
-                Select Game
-          </Typography>
-          <select 
-            className="form-control outline-primary" 
-            aria-labelledby="game" 
-            value={gameSelected}
-            onChange={handleGameSelect}
-            id='gameSelect'
-            >
-            <option className="dropdown-item" id="game_selected" value="1">EV.io</option>
-            <option className="dropdown-item" id="game_selected" value="5">League of Kingdoms</option>
-            <option className="dropdown-item" id="game_selected" value="7">Big Time</option>
-            <option className="dropdown-item" id="game_selected" value="9">Champions Ascension</option>
-            <option className="dropdown-item" id="game_selected" value="2">Axie Infinity </option>
-            <option className="dropdown-item" id="game_selected" value="3">The Sandbox</option>
-            <option className="dropdown-item" id="game_selected" value="4">Illuvium</option>
-            <option className="dropdown-item" id="game_selected" value="6">Castle Crush</option>
-            <option className="dropdown-item" id="game_selected" value="8">Castaways</option>
-            <option className="dropdown-item" id="game_selected" value="10">Crypto Unicorns</option>
-            <option className="dropdown-item" id="game_selected" value="11">Pixels.xyz</option>
-            <option className="dropdown-item" id="game_selected" value="12">My Pet Hooligan</option>
-          </select>          
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
+          <option className="dropdown-item" id="game_selected" value="1">
+            EV.io
+          </option>
+          <option className="dropdown-item" id="game_selected" value="5">
+            League of Kingdoms
+          </option>
+          <option className="dropdown-item" id="game_selected" value="7">
+            Big Time
+          </option>
+          <option className="dropdown-item" id="game_selected" value="9">
+            Champions Ascension
+          </option>
+          <option className="dropdown-item" id="game_selected" value="2">
+            Axie Infinity{" "}
+          </option>
+          <option className="dropdown-item" id="game_selected" value="3">
+            The Sandbox
+          </option>
+          <option className="dropdown-item" id="game_selected" value="4">
+            Illuvium
+          </option>
+          <option className="dropdown-item" id="game_selected" value="6">
+            Castle Crush
+          </option>
+          <option className="dropdown-item" id="game_selected" value="8">
+            Castaways
+          </option>
+          <option className="dropdown-item" id="game_selected" value="10">
+            Crypto Unicorns
+          </option>
+          <option className="dropdown-item" id="game_selected" value="11">
+            Pixels.xyz
+          </option>
+          <option className="dropdown-item" id="game_selected" value="12">
+            My Pet Hooligan
+          </option>
+        </select>
+      </Box>
+      <Box
+        gridColumn="span 3"
+        backgroundColor={colors.primary[400]}
+        display="flex"
+      >
+        <Typography variant="h3" fontWeight="600" color={colors.grey[100]}>
+          Select Chain
+        </Typography>
+        <select
+          className="form-control outline-primary"
+          aria-labelledby="chain"
+          value={chainSelected}
+          onChange={handleChainSelect}
+          id="chainSelect"
         >
-          <Typography
-                variant="h3"
-                fontWeight="600"
-                color={colors.grey[100]}
-          >
-                Select Chain
-          </Typography>
-          <select 
-            className="form-control outline-primary" 
-            aria-labelledby="chain" 
-            value={chainSelected} 
-            onChange={handleChainSelect}
-            id='chainSelect'
-          >
-            <option className="dropdown-item" id="chain_selected" value="1">USD</option>
-            <option className="dropdown-item" id="chain_selected" value="2">Etherium</option>
-            <option className="dropdown-item" id="chain_selected" value="3">Bitcoin</option>
-            <option className="dropdown-item" id="chain_selected" value="4">Great Britain Pound</option>
-            <option className="dropdown-item" id="chain_selected" value="5">European Monetary Unit (Euro)</option>
-            <option className="dropdown-item" id="chain_selected" value="6">Japanese yen</option>
-          </select>   
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
+          <option className="dropdown-item" id="chain_selected" value="1">
+            USD
+          </option>
+          <option className="dropdown-item" id="chain_selected" value="2">
+            Etherium
+          </option>
+          <option className="dropdown-item" id="chain_selected" value="3">
+            Bitcoin
+          </option>
+          <option className="dropdown-item" id="chain_selected" value="4">
+            Great Britain Pound
+          </option>
+          <option className="dropdown-item" id="chain_selected" value="5">
+            European Monetary Unit (Euro)
+          </option>
+          <option className="dropdown-item" id="chain_selected" value="6">
+            Japanese yen
+          </option>
+        </select>
+      </Box>
+      <Box
+        gridColumn="span 3"
+        backgroundColor={colors.primary[400]}
+        display="flex"
+      >
+        <Typography variant="h3" fontWeight="600" color={colors.grey[100]}>
+          Select Timelapse
+        </Typography>
+        <select
+          className="form-control outline-primary"
+          aria-labelledby="chain"
+          value={timeSelected}
+          onChange={handleRangeSelect}
+          id="timeSelect"
         >
-          <Typography
-                variant="h3"
-                fontWeight="600"
-                color={colors.grey[100]}
-          >
-                Select Timelapse
-          </Typography>
-          <select 
-            className="form-control outline-primary" 
-            aria-labelledby="chain" 
-            value={timeSelected} 
-            onChange={handleRangeSelect}
-            id='timeSelect'
-            >
-            <option className="dropdown-item" id="time_slected" value="8">7 Days</option>
-            <option className="dropdown-item" id="time_selected" value="16">15 Days</option>
-            <option className="dropdown-item" id="time_selected" value="32">30 Days</option>
-          </select>
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
+          <option className="dropdown-item" id="time_slected" value="8">
+            7 Days
+          </option>
+          <option className="dropdown-item" id="time_selected" value="16">
+            15 Days
+          </option>
+          <option className="dropdown-item" id="time_selected" value="32">
+            30 Days
+          </option>
+        </select>
+      </Box>
+      <Box
+        gridColumn="span 3"
+        backgroundColor={colors.primary[400]}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Button
+          type="submit"
+          color="secondary"
+          variant="contained"
+          onClick={handleTrackCoinClick}
+          id="Track"
         >
-          <Button
-            type="submit" color="secondary" variant="contained" onClick={handleTrackCoinClick} id='Track'
-          >
-            Track Coin           
-          </Button>
-        </Box>
-        {/* ROW 2 */}
+          Track Coin
+        </Button>
+      </Box>
+      {/* ROW 2 */}
       <Box
         height="75vh"
         border={`1px solid ${colors.grey[100]}`}
         borderRadius="4px"
       >
-        { showChart && <BarComponent chain={chainSelected} coin={gameSelected} range={timeSelected} data-testid="bar-component"/>}
+        {showChart && (
+          <BarComponent
+            chain={chainSelected}
+            coin={gameSelected}
+            range={timeSelected}
+            data-testid="bar-component"
+          />
+        )}
       </Box>
     </Box>
   );

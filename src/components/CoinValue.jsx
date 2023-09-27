@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
@@ -14,17 +14,21 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/chart/1/2/mapped');
+        const response = await fetch(
+          "http://localhost:8080/api/chart/1/2/mapped"
+        );
         const data_API = await response.json();
-        const DataChart = [{ 
+        const DataChart = [
+          {
             id: "Game1",
             color: tokens("dark").greenAccent[500],
-            data : data_API,
-        }];   
+            data: data_API,
+          },
+        ];
         setChartData(DataChart);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         setLoading(false);
       }
     };
