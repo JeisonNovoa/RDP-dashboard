@@ -16,7 +16,7 @@ if (
 ) {
   console.log("🛑 QuickNode API URL not found.");
 }
-1;
+
 if (
   !process.env.REACT_APP_WALLET_ADDRESS ||
   process.env.REACT_APP_WALLET_ADDRESS === ""
