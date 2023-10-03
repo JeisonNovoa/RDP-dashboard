@@ -12,7 +12,7 @@ const ChartComponent = ({ chain, coin, range, isCustomLineColors = false, isDash
   const link_vol = `${url}${chain}/${coin}/${range}/volume/mapped`;
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+ console.log(link_close);
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
