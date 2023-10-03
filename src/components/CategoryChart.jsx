@@ -13,7 +13,7 @@ const BarChart = ({ isDashboard = false }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/chart/games/category/mapped"
+          "https://indexing-api-servicie-ff8125353fb9.herokuapp.com/api/chart/games/category/mapped"
         );
         const data = await response.json();
         setChartData(data);

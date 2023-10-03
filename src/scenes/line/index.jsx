@@ -30,7 +30,7 @@ const Line = () => {
     console.log(selectedValue);
   };
   const [showChart, setShowChart] = useState(false);
-  const [error, setError] = useState(false);
+  //const [error, setError] = useState(false);
 
   // Handle button click to show ChartComponent
   const handleTrackCoinClick = () => {

@@ -115,7 +115,7 @@ const InterfaceComponent = ({
   }, [ChartURL]);
 
   const postData = async () => {
-    if (type == "coin") {
+    if (type === "coin") {
       try {
         const response = await fetch(EndpointChart, {
           method: "POST",

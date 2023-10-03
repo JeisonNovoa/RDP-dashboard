@@ -15,7 +15,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/chart/1/2/mapped"
+          "https://indexing-api-servicie-ff8125353fb9.herokuapp.com/api/chart/1/2/mapped"
         );
         const data_API = await response.json();
         const DataChart = [
