@@ -1,5 +1,6 @@
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 if (
